@@ -1,0 +1,173 @@
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+  />
+
+  <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'popup.js' | asset_url }}" defer="defer"> </script>
+
+
+<div class="popup-overlay" id="popup">
+    <div class="popup-wrapper" data-aos="fade-right">
+      <div class="popup-image">
+        {{ section.settings.image| image_url: width : 500 |image_tag }}
+      </div>
+      <div class="popup-content">
+        <h3>{{ section.settings.popup }}</h3>
+        <h2>{{ section.settings.popup-title }}</h2>
+        <p class="popup-title">
+          {{ section.settings.popup-text }}
+        </p>
+        <div class="icon-popup">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- popup success -->
+  {% for block in section.blocks %}
+    {%if block.type == "popup-success"  %}
+  <div class="popup-success" id="popup">
+    <div class="popup-wrapper">
+      <div class="popup-content">
+        <h1>{{ block.settings.textTitleSuccess }}</h1>
+        <p>{{block.settings.textSuccess }}</p>
+        <div class="icon-popup-fetch">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elsif block.type == "popup-error"  %} }
+
+  <!-- popup error -->
+  <div class="popup-error" id="popup">
+    <div class="popup-wrapper">
+      <div class="popup-content">
+        <h1>{{ block.settings.textTitleError }}</h1>
+        <p>{{block.settings.textError }}</p>
+        <div class="icon-popup-error icon-popup-fetch">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- popup cookie -bar-->
+{% elsif block.type == "cookie-bar"  %} }
+  <div class="popup-cookie-bar">
+    <div class="cookie-bar-wrapper">
+      <div class="cookie-left">
+        <p>
+          {{block.settings.cookieBar }}
+        </p>
+      </div>
+      <div class="cookie-right">
+        <button class="btn-accept">{{block.settings.textAccept }}</button>
+        <button class="btn-ignore">{{block.settings.textIgnore }}</button>
+      </div>
+    </div>
+  </div>
+
+  {%endif %} }
+{% endfor %}
+
+
+  {% schema %}
+    {
+      "name": "Popup Cookie",
+      "tag": "section",
+      "class": "popups-cookies",
+      "settings": [{
+        "type": "image_picker",
+        "id": "image",
+        "label": "image"
+      },{
+        "type": "text",
+        "id": "popup",
+        "label": "Popup",
+        "default":"Big Sale"
+      },{
+        "type": "text",
+        "id": "popup-title",
+        "label": "Popup Title",
+        "default":"Up to 50% Off Black Friday"
+      },{
+        "type": "text",
+        "id": "popup-text",
+        "label": "Popup Text",
+        "default":" Applicable to all products from Nov 25 to Nov 29"
+      }
+    ],
+    "blocks": [
+    {
+        "type":"success",
+        "name":"popup-success",
+        "settings": [{
+          "type": "text",
+          "id": "textTitleSuccess",
+          "label": "text title ", 
+          "default": "text title"
+        },
+        {
+          "type": "text",
+          "id": "textSuccess",
+          "label": "Success",
+          "default":"Success"
+        },
+      ]
+    },
+    {
+      "type":"popup-error",
+      "name":"popup-error",
+      "settings": [{
+        "type": "text",
+        "id": "textTitleError",
+        "label": "text title ", 
+        "default": "text title"
+      },
+      {
+        "type": "text",
+        "id": "textError",
+        "label": "Error",
+        "default":"Error"
+      },
+      ]
+    },
+    {
+      "type":"cookie-bar",
+      "name":"cookie-bar",
+      "settings": [{
+        "type": "text",
+        "id": "cookieBar",
+        "label": "cookie bar",
+        "default":"cookie bar"
+      },
+      {
+        "type": "text",
+        "id": "textAccept",
+        "label": "text accept",
+        "default":"text accept"
+      },
+      {
+        "type": "text",
+        "id": "textIgnore",
+        "label": "text ignore",
+        "default":"text ignore"
+      },
+      ]
+    }
+  
+  ],
+    "presets":[
+        {
+            "name": "Popup",
+        
+        }
+    ],
+    }
+  {% endschema %}
+  
